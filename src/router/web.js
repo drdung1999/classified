@@ -1,5 +1,5 @@
 const express = require('express');
-const {home_controllers, auth_controllers, user_controllers} = require('../controllers/index')
+const {home_controllers, auth_controllers, user_controllers, product_controllers} = require('../controllers/index')
 
 let router = express.Router();
 
@@ -20,6 +20,8 @@ function init_router(app){
     app.get('/post-product',auth_controllers.check_login, home_controllers.render_post_product_page );
 
     app.post("/user-update-profile",auth_controllers.check_login, user_controllers.user_update_profile)
+
+    app.post("/user-post-new-product",auth_controllers.check_login,product_controllers.post_new_product);
 
     // catch 404 and forward to error handler
     router.use(function(req, res, next) {

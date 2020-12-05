@@ -31,7 +31,7 @@ const user_update_profile = async (req, res) => {
         return res.status(500).send(message_valid_user_update_profile.error_undefined);
     }
 }
-
+ 
 module.exports = {
     render_user_profile_page,
     user_update_profile

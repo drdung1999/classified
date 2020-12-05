@@ -25,6 +25,12 @@ user_schema.statics = {
         })
     },
 
+    find_by_id(user_id){
+        return this.findOne({
+            "_id": user_id
+        }).exec();
+    },
+
     check_account_is_exists(email, password){
         return this.findOne({"email": email, "password": password}).exec();
     },

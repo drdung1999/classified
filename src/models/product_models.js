@@ -5,7 +5,7 @@ let product_schemma = new Schema({
     seller_id: String,
     images: [],
     type: String,
-    price: String,
+    price: Number,
     seller_phone: String,
     address: String,
     name_product: String,
@@ -19,6 +19,13 @@ let product_schemma = new Schema({
 product_schemma.statics = {
   create_new(product_data_to_create_new){
     return this.create(product_data_to_create_new);
+  },
+
+  get_list_items_of_category(type,sort, skip){
+    skip = skip * 10;
+    return this.find({
+      "type": type,
+    }).limit(10).sort(sort).skip(skip).exec();
   }
 }
 

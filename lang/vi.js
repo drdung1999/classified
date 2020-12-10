@@ -15,4 +15,5 @@ module.exports.message_valid_user_update_profile = {
 module.exports.post_new_product_message = {
     erorr_image_product_type: 'Kiểu file không hợp lệ chỉ chấp nhận: jpg, png, gif, jpeg',
     unspecified_error: "Đã có lỗi bất ngờ xảy ra vui lòng F5 lại trang. Nếu còn gặp phải lỗi này xin vui lòng liên hệ bộ phận hỗ trợ của chúng tôi",
+    viewed_all_product: "Bạn đã xem hết các sản phẩm được đăng bán"
 }

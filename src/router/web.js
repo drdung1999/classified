@@ -22,11 +22,14 @@ function init_router(app){
     app.post("/user-update-profile",auth_controllers.check_login, user_controllers.user_update_profile)
 
     app.post("/user-post-new-product",auth_controllers.check_login,product_controllers.post_new_product);
+    
+    app.get("/product-:type_product",home_controllers.render_phone_products);
+    app.get(`/get-list-items-of-category-:category_name-:sort_category_items-:skip`,product_controllers.get_list_items_of_category);
 
     // catch 404 and forward to error handler
     router.use(function(req, res, next) {
         // respond with html page
-        return res.render('./404_page/index')
+        return res.render('./404_page/index');
     });
 
     return app.use('/', router)

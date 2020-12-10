@@ -41,6 +41,37 @@ const post_new_product = (req, res) => {
       })
 }
 
+const get_list_items_of_category = async (req, res) => {
+  try {
+    let category_name = req.params.category_name;
+    let sort_category_items = req.params.sort_category_items;
+    let skip = Number(req.params.skip);
+
+    if(skip == NaN || skip < 0){
+      return res.status(500).send(post_new_product_message.unspecified_error);
+    } 
+
+    if(!TYPE_PRODUCTS.includes(category_name))
+    return res.status(500).send(post_new_product_message.unspecified_error);
+
+    if(sort_category_items < 1 || sort_category_items > 3)
+    return res.status(500).send(post_new_product_message.unspecified_error);
+
+
+    let list_items_of_category = await product_services.get_list_items_of_category(category_name,sort_category_items,skip);
+
+    if(skip > 0 && list_items_of_category.length == 0) {
+      return res.status(200).send(post_new_product_message.viewed_all_product);
+    }
+
+    return res.status(200).send(list_items_of_category);
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+}
+
 module.exports = {
-    post_new_product
+    post_new_product,
+    TYPE_PRODUCTS,
+    get_list_items_of_category
 }

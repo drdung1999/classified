@@ -23,6 +23,20 @@ const post_new_product = (user_id,price_product, type_product_selected, title_pr
     })
 }
 
+const get_list_items_of_category = (category_name,sort_category_items, skip) => {
+    return new Promise( async (resolve, reject) => {
+        let sort = null;
+        if(sort_category_items == 1) sort = {"created_at": -1}
+        if(sort_category_items == 2) sort = {"price": 1}
+        if(sort_category_items == 3) sort = {"price": -1}
+
+        let list_items_of_category = await product_models.get_list_items_of_category(category_name,sort, skip);
+        
+        return resolve(list_items_of_category);
+    })
+}
+
 module.exports = {
-    post_new_product
+    post_new_product,
+    get_list_items_of_category
 } 

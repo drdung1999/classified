@@ -26,6 +26,14 @@ product_schemma.statics = {
     return this.find({
       "type": type,
     }).limit(10).sort(sort).skip(skip).exec();
+  },
+
+  find_product_by_id(product_id){
+    return this.findOne({"_id": product_id}).exec();
+  },
+
+  count_view_product(product_id){
+    return this.updateOne({"_id": product_id, },{ $inc: { view: 1 } }).exec();
   }
 }
 

@@ -1,0 +1,165 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Unimark</title>
+<link rel="shortcut icon" href="./custom/images/logo.png">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-select.css">
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- alertify css -->
+<link rel="stylesheet" href="./custom/css/alertify.min.css">
+<link rel="stylesheet" href="./custom/css/default.min.css">
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Resale Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<!--fonts-->
+<link href='//fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<!--//fonts-->	
+<!-- js -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- js -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-select.js"></script>
+<script>
+  $(document).ready(function () {
+    var mySelect = $('#first-disabled2');
+
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+  });
+</script>
+<script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
+<link href="css/jquery.uls.css" rel="stylesheet"/>
+<link href="css/jquery.uls.grid.css" rel="stylesheet"/>
+<link href="css/jquery.uls.lcd.css" rel="stylesheet"/>
+<!-- Source -->
+<script src="js/jquery.uls.data.js"></script>
+<script src="js/jquery.uls.data.utils.js"></script>
+<script src="js/jquery.uls.lcd.js"></script>
+<script src="js/jquery.uls.languagefilter.js"></script>
+<script src="js/jquery.uls.regionfilter.js"></script>
+<script src="js/jquery.uls.core.js"></script>
+<script>
+			$( document ).ready( function() {
+				$( '.uls-trigger' ).uls( {
+					onSelect : function( language ) {
+						var languageName = $.uls.data.getAutonym( language );
+						$( '.uls-trigger' ).text( languageName );
+					},
+					quickList: ['en', 'hi', 'he', 'ml', 'ta', 'fr'] //FIXME
+				} );
+			} );
+		</script>
+		<link rel="stylesheet" href="css/flexslider.css" media="screen" />
+</head>
+<body>
+	<style>
+		.product-price {
+			padding: 20px 0;
+			display: inline-flex;
+		}
+	</style>
+<div class="header">
+	<%- include("./header") %>
+	<!--single-page-->
+	<div class="single-page main-grid-border">
+		<div class="container">
+			<ol class="breadcrumb" style="margin-bottom: 5px;">
+				<li><a href="/">Trang chủ</a></li>
+				<li class="active"><a href="/product-<%= product_data.type %>"><%= name_product %></a></li>
+			</ol>
+			<div class="product-desc">
+				<div class="col-md-7 product-view">
+					<h2><%= product_data.name_product %></h2>
+					<p> <i class="glyphicon glyphicon-map-marker"></i><%= product_data.address %>| Đăng lúc <%= time_post_product %></p>
+					<div class="flexslider">
+						<ul class="slides">
+							<% product_data.images.forEach(function(image) { %>
+								<li data-thumb="images/products/<%= image %>">
+									<img src="images/products/<%= image %>" />
+								</li>
+							<% }) %>
+						</ul>
+					</div>
+					<!-- FlexSlider -->
+					  <script defer src="js/jquery.flexslider.js"></script>
+					<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+
+						<script>
+					// Can also be used with $(document).ready()
+					$(window).load(function() {
+					  $('.flexslider').flexslider({
+						animation: "slide",
+						controlNav: "thumbnails"
+					  });
+					});
+					</script>
+					<!-- //FlexSlider -->
+					<div class="product-details">
+						<h4>Lượt xem : <strong><%= product_data.view %></strong></h4>
+						<p><strong>Mô tả</strong> : <%= product_data.product_description %></p>
+					
+					</div>
+				</div>
+				<div class="col-md-5 product-details-grid">
+					<div class="item-price">
+						<div class="product-price">
+							<p class="p-price">Giá: </p>
+							<h3 class="rate"><%= gia_sp %> vnđ</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="condition">
+							<p class="p-price">Số điện thoại</p>
+							<h4><%= product_data.seller_phone %></h4>
+							<div class="clearfix"></div>
+						</div>
+						<div class="itemtype">
+							<p class="p-price">Loại sản phẩm: </p>
+							<h4><%= name_product %></h4>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+						<div class="tips">
+						<h4></h4>
+							<ol>
+							</ol>
+						</div>
+				</div>
+			<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!--//single-page-->
+
+	<!--footer section start-->		
+	<%- include("./footer") %>
+	<!--footer section end-->
+		
+	<!-- alertify js -->
+	<script src="./custom/js/alertify.min.js"></script>
+</body>
+</html>

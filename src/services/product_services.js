@@ -1,5 +1,6 @@
 const user_models = require('../models/user_models');
 const product_models = require('../models/product_models');
+const view_models = require('../models/view_models');
 
 const post_new_product = (user_id,price_product, type_product_selected, title_product, description_product, src_images) => {
     return new Promise( async (resolve, reject) => {
@@ -17,7 +18,8 @@ const post_new_product = (user_id,price_product, type_product_selected, title_pr
             product_description: description_product
         }
 
-        await product_models.create_new(product_data_to_create_new);
+        let product_data = await product_models.create_new(product_data_to_create_new);
+        view_models.create_new(product_data._id);
 
         return resolve();
     })
@@ -36,7 +38,31 @@ const get_list_items_of_category = (category_name,sort_category_items, skip) => 
     })
 }
 
+const view_detail_product = (product_id) => {
+    return new Promise( async (resolve, reject) => {
+        let product_data = await product_models.find_product_by_id(product_id);
+
+        //product_models.increase_product_view(product_id);
+
+        if(!product_data) return reject();
+
+        return resolve(product_data);
+    });
+}
+
+const count_view_product = async (id_viewer, product_id) => {
+    let check_viewed_products = await view_models.check_viewed_products(product_id,id_viewer);
+
+    if(!check_viewed_products){
+        await view_models.tick_viewed(product_id,id_viewer);
+
+        await product_models.count_view_product(product_id);
+    }
+}
+
 module.exports = {
     post_new_product,
-    get_list_items_of_category
+    get_list_items_of_category,
+    view_detail_product,
+    count_view_product
 } 

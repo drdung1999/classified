@@ -25,6 +25,7 @@ function init_router(app){
     
     app.get("/product-:type_product",home_controllers.render_phone_products);
     app.get(`/get-list-items-of-category-:category_name-:sort_category_items-:skip`,product_controllers.get_list_items_of_category);
+    app.get(`/view-product-:product_id`,product_controllers.view_detail_product);
 
     // catch 404 and forward to error handler
     router.use(function(req, res, next) {

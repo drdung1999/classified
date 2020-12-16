@@ -1,4 +1,5 @@
 const render_home_page = (req, res) =>{
+    
     return res.render('./home/index')
 }
 

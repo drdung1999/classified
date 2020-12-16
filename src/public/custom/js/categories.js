@@ -53,7 +53,7 @@ function convert_timestamp(time){
       
       return `${hour} ${timeline[1]} Tháng ${timeline[0]}, ${timeline[2]}`
     }
-  }
+}
 
 function handle_user_click_category_item(){
     $('.category-item').on('click', function(){

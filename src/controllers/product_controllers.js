@@ -1,6 +1,8 @@
 const {product_services} = require('../services/index');
 const helper_upload_file = require('../helper/upload_images');
 const {post_new_product_message} = require('../../lang/vi');
+const helper = require('../helper/index');
+const uid = require('uid');
 
 const TYPE_PRODUCTS = ["phone","electronic","car", "bike", "furniture","pet", "book", "fashion", "kid", "services", "job", "real_estate"];
 
@@ -70,8 +72,33 @@ const get_list_items_of_category = async (req, res) => {
   }
 }
 
+const view_detail_product = async (req, res) => {
+    try {
+      let product_id = req.params.product_id;
+
+      // set session for count view product
+      if(!req.session.user_id && !req.session.validate){
+        req.session.validate = `${uid(11)}+${new Date().getTime()}`
+      }
+
+      product_services.count_view_product(req.session.user_id || req.session.validate, product_id);
+
+      let product_data = await product_services.view_detail_product(product_id);
+
+      let time_post_product = helper.convert_timestamp(product_data.created_at);
+      let gia_sp = new Intl.NumberFormat().format(product_data.price);
+      let name_product = helper.convert_product_type_to_vi(product_data.type);
+
+      return res.render('./home/product_detail', {product_data,time_post_product, gia_sp, name_product });
+    } catch (error) {
+      return res.redirect('/error');
+    }
+ 
+}
+
 module.exports = {
     post_new_product,
     TYPE_PRODUCTS,
-    get_list_items_of_category
+    get_list_items_of_category,
+    view_detail_product
 }
